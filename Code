@@ -72,7 +72,49 @@ def get_SB_expectation(xs, A, lamb, mu, sig, signal_amp):
     ys = []
     for x in xs:
         ys.append(A*np.exp(-x/lamb) + signal_gaus(x, mu, sig, signal_amp))
-    return ys 
+    return ys
+
+#%%
+#Part 1 Generating Data
+import matplotlib.pyplot as plt 
+# Making plots. 
+import numpy as np 
+# Random number generation.
+# Generate 1k random numbers from a uniform distribution. 
+# The returned type is a numpy array, with length 1k.
+vals = generate_data()
+# Make a histogram.
+bin_heights, bin_edges, patches = plt.hist(vals, range = [104, 155], bins = 30) 
+#Adding the bin made the horizontal line narrower
+plt.show()
+# bin_heights and bin_edges are numpy arrays.
+# patches are the matplotlib bar objects, which we won’t need.
+
+#%%
+#Part 2 Fitting Data
+lamb=sum(generate_background(N_b,b_tau))/N_b#from max likelihood method, lambda is the sum of y values divided by the number of data
+#lamb=sum(vals)/N_b
+
+print('lambda is',lamb)
+
+#Finding an A that scales the function so that the area under the histogram and the fit curve are the same
+A=[]
+for i in range(50000,60000):
+    if -1<=sum(get_B_expectation(bin_edges[0:10], i, lamb))-sum(bin_heights[0:10])<=1:#only selecting first half to only consider the backgrounf
+        A.append(i)
+A=np.mean(A)
+print('A is', np.mean(A)) 
+
+
+x=np.array(range(104,155))
+y=A*np.exp(-x/lamb)
+plt.plot(x,A*np.exp(-x/lamb))   
+bin_heights, bin_edges, patches = plt.hist(vals, range = [104, 155], bins = 30) 
+plt.show()
+
+
+
+
     
     
 
