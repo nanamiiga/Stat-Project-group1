@@ -112,6 +112,11 @@ plt.plot(x,A*np.exp(-x/lamb))
 bin_heights, bin_edges, patches = plt.hist(vals, range = [104, 155], bins = 30) 
 plt.show()
 
+#%%
+#Part 3 Goodness of Fit
+
+print('chi^2 value is', get_B_chi(vals,[104,120],10,A,lamb))
+
 
 
 
