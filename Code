@@ -157,6 +157,7 @@ import pandas as pd
 
 #plt.hist(chi_list, bins = 300)
 plt.plot(chi_list, p_list, 'o')
+#graph of p_value against chi^2 value
 plt.show()
 print(chi_list)
 
