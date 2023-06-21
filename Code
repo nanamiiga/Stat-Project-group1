@@ -117,6 +117,48 @@ plt.show()
 #Only considering the background so the range is 104-120
 print('chi^2 value is', get_B_chi(vals,[104,120],10,A,lamb))
 
+#%%
+#Part 4a  Hypothesis Testing
+#Considering the whole range of but assume all is background masses, so range is 104-155
+import scipy.stats as stats
+
+print('min chi^2 value is', get_B_chi(vals,[104,155],30,A,lamb))
+print('p_value is', stats.chi2.cdf(x = Chi_squared_values, df = 28))
+#%%
+#Part 4b
+
+import scipy.stats as stats
+
+iteration = 0
+chi_list = []
+while iteration < 100 :
+
+    vals = generate_data()
+    lamb=sum(generate_background(N_b,b_tau))/N_b
+    
+    
+    Chi_squared_values = round(get_B_chi(vals,[104,155],30,A,lamb), 1)
+    
+    chi_list.append(Chi_squared_values)
+    
+    
+    p_value = stats.chi2.cdf(x = Chi_squared_values, df = 28)
+    
+    print(Chi_squared_values)
+    iteration = iteration + 1
+    
+    
+    plt.show()
+
+import pandas as pd
+
+plt.hist(chi_list, bins = 100)
+
+plt.show()
+print(chi_list)    
+
+
+
 
 
 
