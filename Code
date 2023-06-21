@@ -131,6 +131,7 @@ import scipy.stats as stats
 
 iteration = 0
 chi_list = []
+p_list = []
 while iteration < 100 :
 
     vals = generate_data()
@@ -143,8 +144,10 @@ while iteration < 100 :
     
     
     p_value = stats.chi2.cdf(x = Chi_squared_values, df = 28)
+    p_list.append(p_value)
     
-    print(Chi_squared_values)
+    
+    print(Chi_squared_values, p_value)
     iteration = iteration + 1
     
     
@@ -152,10 +155,10 @@ while iteration < 100 :
 
 import pandas as pd
 
-plt.hist(chi_list, bins = 100)
-
+#plt.hist(chi_list, bins = 300)
+plt.plot(chi_list, p_list, 'o')
 plt.show()
-print(chi_list)  
+print(chi_list)
 
 #%%
 #Part 5a
