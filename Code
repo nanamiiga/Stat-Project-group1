@@ -177,7 +177,7 @@ mu=125
 sig=1.5
 signal_amp=700
 print('signal chi^2 value is',get_B_chi_sig(vals, [104,155], 30, A, lamb,mu, sig, signal_amp))
-print('p_value is', stats.chi2.cdf(x = get_B_chi_sig(vals, [104,155], 30, A, lamb,mu, sig, signal_amp), df = 28))
+print('p_value is', stats.chi2.cdf(x = get_B_chi_sig(vals, [104,155], 30, A, lamb,mu, sig, signal_amp), df = 25))
 
 #%%
 #This is the code to show the fit graph with the gaussian
