@@ -123,7 +123,7 @@ print('chi^2 value is', get_B_chi(vals,[104,120],10,A,lamb))
 import scipy.stats as stats
 
 print('min chi^2 value is', get_B_chi(vals,[104,155],30,A,lamb))
-print('p_value is', stats.chi2.cdf(x = Chi_squared_values, df = 28))
+print('p_value is', stats.chi2.cdf(x = get_B_chi(vals,[104,155],30,A,lamb), df = 28))
 #%%
 #Part 4b
 
