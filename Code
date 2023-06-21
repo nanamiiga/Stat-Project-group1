@@ -155,7 +155,37 @@ import pandas as pd
 plt.hist(chi_list, bins = 100)
 
 plt.show()
-print(chi_list)    
+print(chi_list)  
+
+#%%
+#Part 5a
+def get_B_chi_sig(vals, mass_range, nbins, A, lamb,mu, sig, signal_amp):
+  
+    bin_heights, bin_edges = np.histogram(vals, range = mass_range, bins = nbins)
+    half_bin_width = 0.5*(bin_edges[1] - bin_edges[0])
+    ys_expected = get_SB_expectation(bin_edges + half_bin_width, A, lamb,mu, sig, signal_amp)
+    chi = 0
+
+    # Loop over bins - all of them for now. 
+    for i in range( len(bin_heights) ):
+        chi_nominator = (bin_heights[i] - ys_expected[i])**2
+        chi_denominator = ys_expected[i]
+        chi += chi_nominator / chi_denominator
+    
+    return chi/float(nbins-2) # B has 2 parameters.
+mu=125
+sig=1.5
+signal_amp=700
+print('signal chi^2 value is',get_B_chi_sig(vals, [104,155], 30, A, lamb,mu, sig, signal_amp))
+
+#%%
+#This is the code to show the fit graph with the gaussian
+x=np.array(range(104,155))
+y=A*np.exp(-x/lamb) + signal_gaus(x, mu, sig, signal_amp)
+plt.plot(x,y)   
+bin_heights, bin_edges, patches = plt.hist(vals, range = [104, 155], bins = 30) 
+plt.show()
+
 
 
 
